@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>블루드빌 Profit</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background: #fff;
+            color: #111827;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 70px 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        }
+
+        .wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: -.03em;
+            margin-bottom: 34px;
+            color: #6b7280;
+        }
+
+        .brand span {
+            color: #5c83ed;
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: -.04em;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 34px;
+        }
+
+        .eyebrow {
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: .14em;
+            color: #5c83ed;
+            margin-bottom: 14px;
+        }
+
+        .title {
+            font-size: clamp(36px, 6vw, 64px);
+            line-height: 1.05;
+            font-weight: 900;
+            letter-spacing: -.06em;
+        }
+
+        .title span {
+            color: #5c83ed;
+        }
+
+        .desc {
+            margin-top: 18px;
+            font-size: 16px;
+            line-height: 1.75;
+            color: #6b7280;
+            word-break: keep-all;
+        }
+
+        .search {
+            display: grid;
+            grid-template-columns: 1fr 170px;
+            gap: 12px;
+            background: #fff;
+            border: 1px solid rgba(17, 24, 39, .08);
+            border-radius: 28px;
+            padding: 22px;
+            box-shadow: 0 20px 50px rgba(17, 24, 39, .06);
+            margin-bottom: 22px;
+        }
+
+        .search input {
+            height: 58px;
+            border: 1px solid rgba(17, 24, 39, .1);
+            border-radius: 18px;
+            padding: 0 18px;
+            font-size: 18px;
+            font-weight: 800;
+            outline: none;
+            background: #fbfcff;
+        }
+
+        .search input:focus {
+            border-color: #5c83ed;
+            box-shadow: 0 0 0 4px rgba(92, 131, 237, .12);
+        }
+
+        .search button {
+            height: 58px;
+            border: 0;
+            border-radius: 18px;
+            background: #5c83ed;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 14px 28px rgba(92, 131, 237, .24);
+        }
+
+        .empty {
+            text-align: center;
+            padding: 42px 20px;
+            border: 1px dashed rgba(92, 131, 237, .26);
+            border-radius: 28px;
+            background: rgba(92, 131, 237, .035);
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .result {
+            display: none;
+        }
+
+        .main-card {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid rgba(17, 24, 39, .08);
+            border-radius: 34px;
+            box-shadow: 0 22px 54px rgba(17, 24, 39, .07);
+            margin-bottom: 18px;
+        }
+
+        .main-left {
+            padding: 32px;
+            background: linear-gradient(180deg, rgba(92, 131, 237, .09), rgba(92, 131, 237, .025));
+        }
+
+        .main-right {
+            padding: 32px;
+            border-left: 1px solid rgba(17, 24, 39, .08);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            height: 34px;
+            padding: 0 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .08em;
+            background: rgba(92, 131, 237, .12);
+            color: #5c83ed;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            height: 34px;
+            padding: 0 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .08em;
+            background: #eef2ff;
+            color: #3730a3;
+        }
+
+        .status.vacant {
+            background: rgba(34, 197, 94, .12);
+            color: #15803d
+        }
+
+        .status.pending {
+            background: rgba(245, 158, 11, .14);
+            color: #b45309
+        }
+
+        .status.done {
+            background: rgba(239, 68, 68, .12);
+            color: #dc2626
+        }
+
+        .room-title {
+            font-size: clamp(30px, 4vw, 46px);
+            line-height: 1.08;
+            font-weight: 900;
+            letter-spacing: -.055em;
+        }
+
+        .merit-label {
+            font-size: 14px;
+            font-weight: 800;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .merit-value {
+            font-size: clamp(24px, 3.4vw, 38px);
+            line-height: 1.08;
+            font-weight: 900;
+            letter-spacing: -.05em;
+            color: #5c83ed;
+            white-space: nowrap;
+        }
+
+        .merit-desc {
+            margin-top: 12px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #4b5563;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid rgba(17, 24, 39, .08);
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: 0 16px 38px rgba(17, 24, 39, .045);
+        }
+
+        .card-label {
+            display: inline-flex;
+            align-items: center;
+            height: 32px;
+            padding: 0 12px;
+            border-radius: 999px;
+            background: rgba(92, 131, 237, .1);
+            color: #5c83ed;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .08em;
+            margin-bottom: 16px;
+        }
+
+        .list {
+            list-style: none;
+            display: grid;
+            gap: 14px;
+        }
+
+        .list li {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(17, 24, 39, .06);
+        }
+
+        .list li:last-child {
+            border-bottom: 0;
+            padding-bottom: 0
+        }
+
+        .name {
+            font-size: 14px;
+            font-weight: 800;
+            color: #6b7280;
+        }
+
+        .value {
+            font-size: 18px;
+            font-weight: 750;
+            text-align: right;
+            line-height: 1.35;
+            word-break: keep-all;
+        }
+
+        .small {
+            display: block;
+            margin-top: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #8b93a3;
+        }
+
+        .notice {
+            padding: 24px;
+            border-radius: 28px;
+            background: #111827;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .notice p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, .78);
+            word-break: keep-all;
+        }
+
+        .notice strong {
+            display: block;
+            font-size: 22px;
+            line-height: 1.25;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .notice a {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            padding: 0 20px;
+            border-radius: 999px;
+            background: #5c83ed;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 900;
+            text-decoration: none;
+        }
+
+        @media(max-width:900px) {
+
+            .main-card,
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            .main-right {
+                border-left: 0;
+                border-top: 1px solid rgba(17, 24, 39, .08)
+            }
+        }
+
+        @media(max-width:640px) {
+            .page {
+                padding: 44px 16px
+            }
+
+            .brand {
+                margin-bottom: 26px
+            }
+
+            .desc,
+            .empty,
+            .notice p,
+            .merit-desc {
+                word-break: keep-all;
+                overflow-wrap: normal;
+            }
+
+            .search {
+                grid-template-columns: 1fr;
+                padding: 18px;
+                border-radius: 24px
+            }
+
+            .search button {
+                width: 100%
+            }
+
+            .main-left,
+            .main-right,
+            .card {
+                padding: 22px
+            }
+
+            .notice {
+                display: block
+            }
+
+            .notice a {
+                width: 100%;
+                margin-top: 16px
+            }
+
+            .title {
+                font-size: 38px
+            }
+
+            .merit-value {
+                font-size: 34px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+        <div class="wrap">
+
+            <div class="brand"><span>zimo</span> · 같은 집, 다른 조건</div>
+
+            <section class="hero">
+                <div class="eyebrow">HUMAN BLUEDEVILLE PROFIT</div>
+                <h1 class="title">호실을 입력하면<br><span>조건이 바로 열립니다</span></h1>
+                <p class="desc">
+                    블루드빌 고객용 실시간 조회 화면입니다.<br>
+                    호실별 타입, 면적, 방향, 가격 메리트를<br>
+                    확인할 수 있습니다.
+                </p>
+            </section>
+
+            <section class="search">
+                <input type="number" id="roomInput" placeholder="예: 1203" inputmode="numeric">
+                <button type="button" onclick="searchRoom()">호실 조회</button>
+            </section>
+
+            <section id="empty" class="empty">
+                <strong>호실 번호를 입력해줘.</strong><br>
+                조회 가능한 호실이면 조건 카드가 바로 표시됩니다.
+            </section>
+
+            <section id="result" class="result">
+
+                <article class="main-card">
+                    <div class="main-left">
+                        <div class="badges">
+                            <span class="badge">실시간 기준</span>
+                            <span class="status" id="statusText">-</span>
+                        </div>
+                        <h2 class="room-title" id="roomTitle">-</h2>
+                    </div>
+
+                    <div class="main-right">
+                        <div class="merit-label">가격 메리트</div>
+                        <div class="merit-value" id="meritValue">-</div>
+                        <p class="merit-desc">최초 분양가 대비 현재 특별가 기준으로 계산된 절감 금액입니다.</p>
+                    </div>
+                </article>
+
+                <div class="grid">
+
+                    <article class="card">
+                        <div class="card-label">TYPE</div>
+                        <ul class="list">
+                            <li><span class="name">타입</span><span class="value" id="typeText">-</span></li>
+                            <li><span class="name">방향</span><span class="value" id="directionText">-</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-label">AREA</div>
+                        <ul class="list">
+                            <li><span class="name">전용면적</span><span class="value" id="privateText">-</span></li>
+                            <li><span class="name">계약면적</span><span class="value" id="contractText">-</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-label">PRICE</div>
+                        <ul class="list">
+                            <li><span class="name">최초 분양가</span><span class="value" id="firstPriceText">-</span></li>
+                            <li><span class="name">현재 특별가</span><span class="value" id="currentPriceText">-</span></li>
+                            <li><span class="name">가격 메리트</span><span class="value" id="meritDetailText">-</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-label">LEASE</div>
+                        <ul class="list">
+                            <li><span class="name">기준 임대조건</span><span class="value">1000 / 70<span class="small">보증금 /
+                                        월세</span></span></li>
+                        </ul>
+                    </article>
+
+                </div>
+
+                <section class="notice">
+                    <div>
+                        <strong>조건은 먼저 확인한<br>사람이 유리합니다.</strong>
+                        <p>같은 블루드빌이어도 호실마다 가격과 상태가 다를 수 있습니다. 관심 호실은 빠르게 문의 주세요.</p>
+                    </div>
+                    <a href="tel:01059361556">전화 문의</a>
+                </section>
+
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        const SUPABASE_URL = "https://qrmfofylmwcbiwaqiwmy.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_t6Gp7WITOevihLLhi_fSdA_-ZFrD6WV";
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        function safe(v) {
+            return v === null || v === undefined || v === "" ? "-" : v;
+        }
+
+        function area(m2, py) {
+            const m = m2 !== null && m2 !== undefined && m2 !== ""
+                ? Number(m2).toFixed(2)
+                : "-";
+
+            const p = py !== null && py !== undefined && py !== ""
+                ? Number(py).toFixed(2)
+                : "-";
+
+            if (m === "-" && p === "-") return "-";
+
+            return `${m}㎡ <span class="small">${p}평</span>`;
+        }
+
+        function money(v) {
+            if (v === null || v === undefined || v === "") return "-";
+            const n = Number(v);
+            if (Number.isNaN(n)) return "-";
+
+            const manwon = Math.round(n / 10000);
+            return manwon.toLocaleString("ko-KR") + " 만원";
+        }
+
+        function statusClass(status) {
+            const s = String(status || "");
+            if (s.includes("공실") || s.includes("가능")) return "status vacant";
+            if (s.includes("청약") || s.includes("보류") || s.includes("진행")) return "status pending";
+            if (s.includes("완료") || s.includes("계약") || s.includes("분양완료")) return "status done";
+            return "status";
+        }
+
+        function setText(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = safe(value);
+        }
+
+        function setHTML(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = value;
+        }
+
+        async function searchRoom() {
+            const roomNo = document.getElementById("roomInput").value.trim();
+            const empty = document.getElementById("empty");
+            const result = document.getElementById("result");
+
+            if (!roomNo) {
+                alert("호실 번호 입력해줘.");
+                return;
+            }
+
+            const { data: room, error } = await sb
+                .from("rooms")
+                .select("*")
+                .eq("room", roomNo)
+                .maybeSingle();
+
+            if (error) {
+                console.error(error);
+                alert("조회 중 오류가 났어.");
+                return;
+            }
+
+            if (!room) {
+                empty.style.display = "block";
+                empty.innerHTML = `<strong>${roomNo}호 데이터가 없습니다.</strong><br>호실 번호를 다시 확인해줘.`;
+                result.style.display = "none";
+                return;
+            }
+
+            const { data: typeData, error: typeError } = await sb
+                .from("types")
+                .select("*")
+                .eq("type", room.type)
+                .maybeSingle();
+
+            if (typeError) {
+                console.error(typeError);
+            }
+
+            const statusEl = document.getElementById("statusText");
+            statusEl.textContent = room.status || "확인필요";
+            statusEl.className = statusClass(room.status);
+
+            setText("roomTitle", `${room.room}호 · ${room.type || "-"}`);
+            setText("typeText", room.type);
+            setText("directionText", typeData?.direction);
+
+            setHTML("privateText", area(typeData?.private_m2, typeData?.private_py));
+            setHTML("contractText", area(typeData?.contract_m2, typeData?.contract_py));
+
+
+            setText("firstPriceText", money(room.first_price));
+            setText("currentPriceText", money(room.current_price));
+
+            const first = Number(room.first_price || 0);
+            const current = Number(room.current_price || 0);
+            const merit = first - current;
+
+            const meritText = merit > 0 ? money(merit) : "-";
+            setText("meritValue", meritText);
+            setHTML("meritDetailText", merit > 0 ? `${meritText}<span class="small">최초가 대비 절감</span>` : "-");
+
+            empty.style.display = "none";
+            result.style.display = "block";
+        }
+
+        document.getElementById("roomInput").addEventListener("keydown", function (e) {
+            if (e.key === "Enter") searchRoom();
+        });
+    </script>
+
+</body>
+
+</html>

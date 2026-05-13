@@ -1,0 +1,216 @@
+warning: in the working copy of 'assets/css/style.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/assets/css/style.css b/assets/css/style.css[m
+[1mindex d6f6bf7..8767663 100644[m
+[1m--- a/assets/css/style.css[m
+[1m+++ b/assets/css/style.css[m
+[36m@@ -1523,10 +1523,6 @@[m [mbutton {[m
+     font-size: 14px;[m
+   }[m
+ [m
+[31m-  .zimo-info-tab:last-child {[m
+[31m-    width: 100%;[m
+[31m-  }[m
+[31m-[m
+   .zimo-info-panel__media {[m
+     border-radius: 22px;[m
+   }[m
+[36m@@ -2234,7 +2230,7 @@[m [mbutton {[m
+ [m
+ [m
+ /* =========================================================[m
+[31m-   HERO PRIMARY MEDIA — desktop ≥901px (merged from inline)[m
+[32m+[m[32m   HERO PRIMARY MEDIA — desktop ≥901px[m
+ ========================================================= */[m
+ @media (min-width: 901px) {[m
+   .hero-primary-media__bottom {[m
+[36m@@ -2258,14 +2254,139 @@[m [mbutton {[m
+     padding: 6px 10px;[m
+   }[m
+ [m
+[32m+[m[32m  .hero-primary-media__stat--icon {[m
+[32m+[m[32m    display: flex;[m
+[32m+[m[32m    flex-direction: row;[m
+[32m+[m[32m    align-items: center;[m
+[32m+[m[32m    justify-content: flex-start;[m
+[32m+[m[32m    gap: 8px;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__icon {[m
+[32m+[m[32m    flex: 0 0 30px;[m
+[32m+[m[32m    width: 30px;[m
+[32m+[m[32m    height: 30px;[m
+[32m+[m[32m    border-radius: 11px;[m
+[32m+[m[32m    display: inline-flex;[m
+[32m+[m[32m    align-items: center;[m
+[32m+[m[32m    justify-content: center;[m
+[32m+[m[32m    color: #5867f5;[m
+[32m+[m[32m    background: rgba(255, 255, 255, 0.72);[m
+[32m+[m[32m    box-shadow:[m
+[32m+[m[32m      inset 0 0 0 1px rgba(255, 255, 255, 0.75),[m
+[32m+[m[32m      0 6px 14px rgba(35, 49, 120, 0.10);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__icon svg {[m
+[32m+[m[32m    width: 17px;[m
+[32m+[m[32m    height: 17px;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__text {[m
+[32m+[m[32m    min-width: 0;[m
+[32m+[m[32m    display: flex;[m
+[32m+[m[32m    flex-direction: column;[m
+[32m+[m[32m    gap: 1px;[m
+[32m+[m[32m  }[m
+[32m+[m
+   .hero-primary-media__label {[m
+     font-size: 9px;[m
+     line-height: 1.15;[m
+[31m-    margin-bottom: 5px;[m
+[32m+[m[32m    margin-bottom: 3px;[m
+   }[m
+ [m
+   .hero-primary-media__value {[m
+     font-size: 11px;[m
+[31m-    line-height: 1.28;[m
+[32m+[m[32m    line-height: 1.2;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m
+[32m+[m[32m/* =========================================================[m
+[32m+[m[32m   HERO PRIMARY MEDIA — mobile ≤900px icon fix[m
+[32m+[m[32m========================================================= */[m
+[32m+[m[32m@media (max-width: 900px) {[m
+[32m+[m[32m  .hero-primary-media__stat--icon {[m
+[32m+[m[32m    display: flex !important;[m
+[32m+[m[32m    flex-direction: row !important;[m
+[32m+[m[32m    align-items: center !important;[m
+[32m+[m[32m    justify-content: flex-start !important;[m
+[32m+[m[32m    gap: 12px !important;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__stat--icon .hero-primary-media__icon {[m
+[32m+[m[32m    flex: 0 0 38px;[m
+[32m+[m[32m    width: 38px;[m
+[32m+[m[32m    height: 38px;[m
+[32m+[m[32m    border-radius: 14px;[m
+[32m+[m[32m    display: inline-flex;[m
+[32m+[m[32m    align-items: center;[m
+[32m+[m[32m    justify-content: center;[m
+[32m+[m[32m    color: #5867f5;[m
+[32m+[m[32m    background: rgba(255, 255, 255, 0.76);[m
+[32m+[m[32m    box-shadow:[m
+[32m+[m[32m      inset 0 0 0 1px rgba(255, 255, 255, 0.75),[m
+[32m+[m[32m      0 8px 18px rgba(35, 49, 120, 0.10);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__stat--icon .hero-primary-media__icon svg {[m
+[32m+[m[32m    width: 20px;[m
+[32m+[m[32m    height: 20px;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__text {[m
+[32m+[m[32m    min-width: 0;[m
+[32m+[m[32m    display: flex;[m
+[32m+[m[32m    flex-direction: column;[m
+[32m+[m[32m    gap: 1px;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__stat--icon .hero-primary-media__label {[m
+[32m+[m[32m    margin-bottom: 3px;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__stat--icon .hero-primary-media__value {[m
+[32m+[m[32m    line-height: 1.18;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* 히어로 입지/규모 아이콘 강제 축소 - 모바일/태블릿/좁은 화면 */[m
+[32m+[m[32m@media (max-width: 1180px) {[m
+[32m+[m[32m  .hero-primary-media__bottom .hero-primary-media__stat.hero-primary-media__stat--icon {[m
+[32m+[m[32m    min-height: 46px !important;[m
+[32m+[m[32m    height: 46px !important;[m
+[32m+[m[32m    max-height: 46px !important;[m
+[32m+[m[32m    padding: 6px 12px !important;[m
+[32m+[m[32m    display: flex !important;[m
+[32m+[m[32m    flex-direction: row !important;[m
+[32m+[m[32m    align-items: center !important;[m
+[32m+[m[32m    justify-content: flex-start !important;[m
+[32m+[m[32m    gap: 8px !important;[m
+[32m+[m[32m    border-radius: 10px !important;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__bottom .hero-primary-media__stat--icon .hero-primary-media__icon {[m
+[32m+[m[32m    flex: 0 0 28px !important;[m
+[32m+[m[32m    width: 28px !important;[m
+[32m+[m[32m    height: 28px !important;[m
+[32m+[m[32m    max-width: 28px !important;[m
+[32m+[m[32m    max-height: 28px !important;[m
+[32m+[m[32m    border-radius: 10px !important;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__bottom .hero-primary-media__stat--icon .hero-primary-media__icon svg {[m
+[32m+[m[32m    width: 15px !important;[m
+[32m+[m[32m    height: 15px !important;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__bottom .hero-primary-media__stat--icon .hero-primary-media__label {[m
+[32m+[m[32m    font-size: 10px !important;[m
+[32m+[m[32m    line-height: 1.1 !important;[m
+[32m+[m[32m    margin-bottom: 2px !important;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .hero-primary-media__bottom .hero-primary-media__stat--icon .hero-primary-media__value {[m
+[32m+[m[32m    font-size: 12px !important;[m
+[32m+[m[32m    line-height: 1.15 !important;[m
+   }[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/index.html b/index.html[m
+[1mindex 412e4b4..70eb565 100644[m
+[1m--- a/index.html[m
+[1m+++ b/index.html[m
+[36m@@ -180,14 +180,36 @@[m
+                 </div>[m
+ [m
+                 <div class="hero-primary-media__bottom">[m
+[31m-                  <div class="hero-primary-media__stat">[m
+[31m-                    <span class="hero-primary-media__label">입지</span>[m
+[31m-                    <strong class="hero-primary-media__value">남구 신정동</strong>[m
+[32m+[m[32m                  <div class="hero-primary-media__stat hero-primary-media__stat--icon">[m
+[32m+[m[32m                    <span class="hero-primary-media__icon" aria-hidden="true">[m
+[32m+[m[32m                      <svg viewBox="0 0 24 24" fill="none">[m
+[32m+[m[32m                        <path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z" stroke="currentColor"[m
+[32m+[m[32m                          stroke-width="1.8" stroke-linejoin="round" />[m
+[32m+[m[32m                        <circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8" />[m
+[32m+[m[32m                      </svg>[m
+[32m+[m[32m                    </span>[m
+[32m+[m
+[32m+[m[32m                    <span class="hero-primary-media__text">[m
+[32m+[m[32m                      <span class="hero-primary-media__label">입지</span>[m
+[32m+[m[32m                      <strong class="hero-primary-media__value">남구 신정동 · 옥동생활권</strong>[m
+[32m+[m[32m                    </span>[m
+                   </div>[m
+ [m
+[31m-                  <div class="hero-primary-media__stat">[m
+[31m-                    <span class="hero-primary-media__label">규모</span>[m
+[31m-                    <strong class="hero-primary-media__value">450 세대 · 전세대 복층형</strong>[m
+[32m+[m[32m                  <div class="hero-primary-media__stat hero-primary-media__stat--icon">[m
+[32m+[m[32m                    <span class="hero-primary-media__icon" aria-hidden="true">[m
+[32m+[m[32m                      <svg viewBox="0 0 24 24" fill="none">[m
+[32m+[m[32m                        <path d="M5 21V7.5L12 4l7 3.5V21" stroke="currentColor" stroke-width="1.8"[m
+[32m+[m[32m                          stroke-linejoin="round" />[m
+[32m+[m[32m                        <path d="M9 21v-4h6v4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />[m
+[32m+[m[32m                        <path d="M9 9h.01M12 9h.01M15 9h.01M9 13h.01M12 13h.01M15 13h.01" stroke="currentColor"[m
+[32m+[m[32m                          stroke-width="2.4" stroke-linecap="round" />[m
+[32m+[m[32m                      </svg>[m
+[32m+[m[32m                    </span>[m
+[32m+[m
+[32m+[m[32m                    <span class="hero-primary-media__text">[m
+[32m+[m[32m                      <span class="hero-primary-media__label">규모</span>[m
+[32m+[m[32m                      <strong class="hero-primary-media__value">366세대 · 84 단일평형</strong>[m
+[32m+[m[32m                    </span>[m
+                   </div>[m
+ [m
+                   <a href="profit.html" class="hero-primary-media__action">[m

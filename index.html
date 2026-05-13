@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>휴먼블루드빌 임차인 모집</title>
+  <meta name="description" content="신정동 휴먼블루드빌 임차인 모집. 보증금 1,000만원, 월세 70만원, 복층, 실평수 15평, 가능 호실 3개 안내." />
+  <meta name="theme-color" content="#fff7ea" />
+
+  <link rel="stylesheet" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+
+  <style>
+    :root {
+      --cream: #fffaf1;
+      --cream-2: #fffdf8;
+      --coral: #e98467;
+      --coral-deep: #d66f4f;
+      --gold: #b99054;
+      --brown: #3c2a1b;
+      --brown-soft: #6f5137;
+      --line: rgba(112, 77, 41, 0.16);
+      --shadow: 0 24px 70px rgba(111, 67, 28, 0.12);
+      --max: 1440px;
+      --pad: clamp(18px, 4vw, 52px);
+      --font: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font);
+      color: var(--brown);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255, 210, 202, 0.22), transparent 24%),
+        radial-gradient(circle at 88% 18%, rgba(255, 226, 174, 0.18), transparent 24%),
+        linear-gradient(180deg, #fffdf8 0%, #fffaf1 54%, #fff7ea 100%);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .page::before,
+    .page::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page::before {
+      width: 360px;
+      height: 360px;
+      left: -120px;
+      top: -130px;
+      background:
+        radial-gradient(circle, rgba(255, 179, 166, 0.36) 0 8%, transparent 9% 100%),
+        radial-gradient(circle at 70% 35%, rgba(248, 163, 143, 0.28), transparent 24%);
+    }
+
+    .page::after {
+      width: 420px;
+      height: 420px;
+      right: -170px;
+      bottom: -180px;
+      background: radial-gradient(circle, rgba(214, 169, 91, 0.18), transparent 64%);
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+
+    .header {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .brand__logo {
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      color: var(--brown);
+    }
+
+    .brand__tag {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brown-soft);
+      letter-spacing: -0.03em;
+    }
+
+    .header-call {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 42px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+      color: var(--brown);
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 10px 30px rgba(111, 67, 28, 0.08);
+      white-space: nowrap;
+    }
+
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding-bottom: 22px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(420px, 0.98fr);
+      gap: clamp(24px, 5vw, 58px);
+      align-items: center;
+      padding-top: 12px;
+    }
+
+    .copy {
+      max-width: 640px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: rgba(185, 144, 84, 0.45);
+    }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 0.98;
+      letter-spacing: -0.075em;
+      font-weight: 900;
+      color: var(--brown);
+    }
+
+    h1 .accent {
+      color: var(--coral-deep);
+    }
+
+    .desc {
+      margin-top: 28px;
+      font-size: clamp(18px, 2.1vw, 25px);
+      line-height: 1.75;
+      letter-spacing: -0.04em;
+      color: var(--brown-soft);
+      font-weight: 650;
+      word-break: keep-all;
+    }
+
+    .desc strong {
+      color: var(--coral-deep);
+      font-weight: 950;
+    }
+
+    .cta-row {
+      margin-top: 34px;
+    }
+
+    .main-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+      min-height: 66px;
+      padding: 0 38px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #e98a69, #d76c4b);
+      color: #fffaf2;
+      font-size: 21px;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      box-shadow: 0 20px 46px rgba(216, 105, 73, 0.28);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .main-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 54px rgba(216, 105, 73, 0.35);
+    }
+
+    .hero-right {
+      display: grid;
+      gap: 16px;
+      align-content: center;
+    }
+
+    .video-card {
+      position: relative;
+      min-height: 430px;
+      border-radius: 34px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(185, 144, 84, 0.24);
+    }
+
+    .video-card video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 247, 234, 0.08) 0%, rgba(255, 247, 234, 0.02) 42%, rgba(60, 42, 27, 0.34) 100%),
+        radial-gradient(circle at 30% 10%, rgba(255, 255, 255, 0.22), transparent 35%);
+      z-index: 1;
+    }
+
+    .video-overlay {
+      position: relative;
+      z-index: 2;
+      min-height: 430px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #fffaf2;
+    }
+
+    .video-badge {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: rgba(255, 250, 242, 0.86);
+      color: var(--brown);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      backdrop-filter: blur(10px);
+    }
+
+    .video-title {
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.08;
+      font-weight: 950;
+      letter-spacing: -0.06em;
+      text-shadow: 0 8px 28px rgba(0, 0, 0, 0.38);
+      word-break: keep-all;
+    }
+
+    .video-bottom {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .video-stat,
+    .video-call {
+      min-height: 54px;
+      border-radius: 15px;
+      padding: 9px 13px;
+      background: rgba(255, 250, 242, 0.84);
+      color: var(--brown);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.34);
+    }
+
+    .video-stat span {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .video-stat strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.28;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      word-break: keep-all;
+    }
+
+    .video-call {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e98a69, #d66f4f);
+      color: #fffaf2;
+      font-size: 14px;
+      font-weight: 950;
+      box-shadow: 0 12px 26px rgba(216, 105, 73, 0.2);
+    }
+
+    .summary-card {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 12px;
+      border-radius: 24px;
+      background: rgba(255, 253, 248, 0.84);
+      border: 1px solid rgba(185, 144, 84, 0.18);
+      box-shadow: 0 12px 30px rgba(111, 67, 28, 0.06);
+      backdrop-filter: blur(10px);
+    }
+
+    .summary-item {
+      min-height: 68px;
+      border-radius: 17px;
+      background: rgba(255, 248, 236, 0.78);
+      border: 1px solid rgba(185, 144, 84, 0.14);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      text-align: center;
+      padding: 8px 6px;
+    }
+
+    .summary-item span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1px;
+      height: 21px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: rgba(233, 132, 103, 0.12);
+      color: var(--coral-deep);
+      font-size: 9px;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+    }
+
+    .summary-item strong {
+      font-size: 13px;
+      line-height: 1.18;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      color: var(--brown);
+      word-break: keep-all;
+    }
+
+    .footer-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 22px;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+
+    .footer-item {
+      padding: 0 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .footer-item:first-child {
+      padding-left: 0;
+    }
+
+    .footer-item:last-child {
+      border-right: 0;
+      padding-right: 0;
+    }
+
+    .footer-item span {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 850;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-item strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--brown-soft);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      word-break: keep-all;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 8px;
+      }
+
+      .copy {
+        max-width: 100%;
+      }
+
+      .video-card,
+      .video-overlay {
+        min-height: 390px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .header {
+        height: 56px;
+      }
+
+      .brand__logo {
+        font-size: 22px;
+      }
+
+      .brand__tag,
+      .header-call,
+      .eyebrow {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-bottom: 20px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 60px);
+      }
+
+      .desc {
+        margin-top: 18px;
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .main-cta {
+        width: 100%;
+        min-height: 58px;
+        font-size: 18px;
+      }
+
+      .video-card,
+      .video-overlay {
+        min-height: 430px;
+        border-radius: 28px;
+      }
+
+      .video-overlay {
+        padding: 20px;
+      }
+
+      .video-bottom {
+        grid-template-columns: 1fr;
+      }
+
+      .video-stat,
+      .video-call {
+        min-height: 58px;
+      }
+
+      .summary-card {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-info {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding-top: 14px;
+      }
+
+      .footer-item {
+        border-right: 0;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .footer-item:last-child {
+        border-bottom: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="container">
+      <header class="header">
+        <a href="#" class="brand" aria-label="zimo">
+          <span class="brand__logo">zimo</span>
+          <span class="brand__tag">휴먼블루드빌 임차인 모집</span>
+        </a>
+
+        <a href="tel:01057861556" class="header-call" data-event="call_click">
+          전화문의 010-5786-1556
+        </a>
+      </header>
+
+      <section class="hero">
+        <div class="hero-grid">
+          <div class="copy">
+            <div class="eyebrow">HUMAN BLUEDEVILLE RENT</div>
+
+            <h1>
+              신정동<br />
+              <span class="accent">휴먼블루드빌</span><br />
+              임차인 모집
+            </h1>
+
+            <p class="desc">
+              보증금 <strong>1,000만원</strong> · 월세 <strong>70만원</strong><br />
+              1~2인 거주에 좋은 복층형 오피스텔<br />
+              관리비 저렴 · 주차 월 3만 · 즉시 입주 · 풀옵션
+            </p>
+
+            <div class="cta-row">
+              <a href="tel:01057861556" class="main-cta" data-event="call_click">
+                전화문의
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <article class="video-card">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="assets/videos/0426.mp4" type="video/mp4" />
+              </video>
+
+              <div class="video-overlay">
+                <div class="video-badge">임대 가능 호실 3개</div>
+
+                <div class="video-title">
+                  신정동 시청옆<br />
+                  휴먼블루드빌 임차 안내
+                </div>
+
+                <div class="video-bottom">
+                  <div class="video-stat">
+                    <span>입주 조건</span>
+                    <strong>즉시 입주<br />풀옵션</strong>
+                  </div>
+
+                  <div class="video-stat">
+                    <span>구성</span>
+                    <strong>복층<br />실평수 15평</strong>
+                  </div>
+
+                  <a href="tel:01057861556" class="video-call" data-event="call_click">
+                    전화문의
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <div class="summary-card">
+              <div class="summary-item">
+                <span>POINT 01</span>
+                <strong>복층형<br />오피스텔</strong>
+              </div>
+
+              <div class="summary-item">
+                <span>POINT 02</span>
+                <strong>1~2인<br />거주 추천</strong>
+              </div>
+
+              <div class="summary-item">
+                <span>POINT 03</span>
+                <strong>즉시 입주<br />풀옵션</strong>
+              </div>
+
+              <div class="summary-item">
+                <span>POINT 04</span>
+                <strong>주차 월 3만<br />관리비 저렴</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-info">
+          <div class="footer-item">
+            <span>연락 가능 시간</span>
+            <strong>평일·주말 09:00 - 21:00</strong>
+          </div>
+
+          <div class="footer-item">
+            <span>상담 방식</span>
+            <strong>전화/문자문의</strong>
+          </div>
+
+          <div class="footer-item">
+            <span>안내 내용</span>
+            <strong>입주 조건 · 가능 호실</strong>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const SUPABASE_URL = "https://qrmfofylmwcbiwaqiwmy.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_t6Gp7WITOevihLLhi_fSdA_-ZFrD6WV";
+    const PROJECT_NAME = "bluedeville_lease";
+
+    const startedAt = Date.now();
+
+    function getSessionId() {
+      const key = "zimo_lease_session_id";
+      let id = sessionStorage.getItem(key);
+
+      if (!id) {
+        id = Date.now() + "-" + Math.random().toString(36).slice(2, 12);
+        sessionStorage.setItem(key, id);
+      }
+
+      return id;
+    }
+
+    function getDevice() {
+      return window.innerWidth <= 768 ? "mobile" : "desktop";
+    }
+
+    function getUtm(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+
+    function trackLandingEvent(eventName) {
+      const staySeconds = Math.max(0, Math.round((Date.now() - startedAt) / 1000));
+
+      const payload = {
+        project: PROJECT_NAME,
+        event_name: eventName,
+        page_url: window.location.href,
+        referrer: document.referrer || null,
+        utm_source: getUtm("utm_source"),
+        utm_medium: getUtm("utm_medium"),
+        utm_campaign: getUtm("utm_campaign"),
+        utm_content: getUtm("utm_content"),
+        utm_term: getUtm("utm_term"),
+        device: getDevice(),
+        user_agent: navigator.userAgent,
+        session_id: getSessionId(),
+        stay_seconds: staySeconds
+      };
+
+      fetch(SUPABASE_URL + "/rest/v1/landing_events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY,
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function () { });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      trackLandingEvent("page_view");
+
+      document.querySelectorAll("[data-event='call_click']").forEach(function (el) {
+        el.addEventListener("click", function () {
+          trackLandingEvent("call_click");
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
