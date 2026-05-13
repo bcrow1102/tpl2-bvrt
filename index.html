@@ -703,9 +703,18 @@
           "Authorization": "Bearer " + SUPABASE_KEY,
           "Prefer": "return=minimal"
         },
-        body: JSON.stringify(payload),
-        keepalive: true
-      }).catch(function () { });
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) {
+          console.log("Supabase tracking:", eventName, res.status);
+          return res.text();
+        })
+        .then(function (text) {
+          if (text) console.log("Supabase response:", text);
+        })
+        .catch(function (error) {
+          console.error("Supabase tracking error:", error);
+        });
     }
 
     document.addEventListener("DOMContentLoaded", function () {
