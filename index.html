@@ -309,6 +309,17 @@
       gap: 10px;
     }
 
+    .video-stat--wide {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .video-stat--wide>div {
+      min-width: 0;
+    }
+
     .video-stat,
     .video-call {
       min-height: 54px;
@@ -531,6 +542,12 @@
       .footer-item:last-child {
         border-bottom: 0;
       }
+
+      .video-stat--wide {
+        grid-column: auto;
+        grid-template-columns: repeat(2, 1fr);
+        min-height: 86px;
+      }
     }
   </style>
 </head>
@@ -540,7 +557,7 @@
     <div class="container">
       <header class="header">
         <a href="#" class="brand" aria-label="zimo">
-          <span class="brand__logo">zimo</span>
+          <span class="brand__logo">zimo.kr</span>
           <span class="brand__tag">휴먼블루드빌 임차인 모집</span>
         </a>
 
@@ -588,18 +605,20 @@
                 </div>
 
                 <div class="video-bottom">
-                  <div class="video-stat">
-                    <span>입주 조건</span>
-                    <strong>즉시 입주<br />풀옵션</strong>
-                  </div>
+                  <div class="video-stat video-stat--wide">
+                    <div>
+                      <span>입주 조건</span>
+                      <strong>즉시 입주<br />풀옵션</strong>
+                    </div>
 
-                  <div class="video-stat">
-                    <span>구성</span>
-                    <strong>복층<br />실평수 15평</strong>
+                    <div>
+                      <span>구성</span>
+                      <strong>복층<br />실평수 15평</strong>
+                    </div>
                   </div>
 
                   <a href="tel:01057861556" class="video-call" data-event="call_click">
-                    전화문의
+                    알아보기
                   </a>
                 </div>
               </div>
